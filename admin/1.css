@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'DM Sans', sans-serif;
+  }
+  
+  body, html {
+    height: 100%;
+  }
+  
+  .login-page {
+    background: url('images/1.jpg') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .login-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.55); /* dark overlay */
+    z-index: 1;
+  }
+  
+  .login-box {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 400px;
+    padding: 40px 30px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 16px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    color: #333; /* Dark Text */
+    text-align: center;
+  }
+  
+  .login-box h2 {
+    margin-bottom: 20px;
+    color: #333; /* Dark Text */
+  }
+  
+  label {
+    font-size: 14px;
+    text-align: left;
+    display: block;
+    margin: 10px 0 5px;
+    color: #444; /* Soft grey for labels */
+  }
+  
+  .input-icon {
+    position: relative;
+    margin-bottom: 15px;
+  }
+  
+  .input-icon i {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #333; /* Dark Icon Color */
+  }
+  
+  .input-icon input {
+    width: 100%;
+    padding: 10px 12px 10px 38px;
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 8px;
+    background-color: #fafafa; /* Light grey background */
+    color: #333;
+    font-size: 15px;
+    outline: none;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  
+  .input-icon input::placeholder {
+    color: #aaa; /* Light grey placeholder */
+  }
+  
+  .input-icon input:focus {
+    background-color: #f0f0f0; /* Lighter grey on focus */
+    border-color: #f4a261; /* Soft gold border on focus */
+  }
+  
+  .options {
+    text-align: left;
+    margin-bottom: 20px;
+    color: #777; /* Light grey text */
+    font-size: 14px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 12px;
+    background: #3f61ab; /* Light grey button */
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    color: #fff9f9; /* Dark text for button */
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  button:hover {
+    background: #3056b7; /* Soft gold on hover */
+  }
+  
+  .error-msg {
+    color: #e76f51; /* Soft red for errors */
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
