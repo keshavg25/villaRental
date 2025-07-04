@@ -12,22 +12,26 @@
         $sfname=$_POST['sifname'];
         $slname=$_POST['silname'];
 
-        // Use prepared statement to check if email exists
-        $stmt = $con->prepare("SELECT * FROM reg WHERE reg_user = ?");
-        $stmt->bind_param("s", $semail);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if ($result->num_rows === 1) {
+        $sel="SELECT * FROM reg  where reg_user = '$semail'";
+        $exe=mysqli_query($con,$sel);
+        $check=mysqli_num_rows($exe);
+
+        if($check==1)
+        {
             $error1_msg = urlencode("THIS EMAIL ID IS ALREADY REGISTERED  !");
             header("Location: index.php?emessage=$error1_msg");
-            exit();
-        } else {
+        }
+        else{
             $success_msg = urlencode("CONGRATS YOU HAVE BEEN REGISTERED SUCCESSFULLY!");
-            // Hash the password before storing
-            $hashed_pass = password_hash($spass, PASSWORD_DEFAULT);
-            $stmt2 = $con->prepare("INSERT INTO reg (reg_user, reg_pass, reg_fname, reg_lname) VALUES (?, ?, ?, ?)");
-            $stmt2->bind_param("ssss", $semail, $hashed_pass, $sfname, $slname);
-            $stmt2->execute();
+            $ins="INSERT INTO reg SET
+                    reg_user='$semail',
+                    reg_pass='$spass',
+                    reg_fname='$sfname',
+                    reg_lname='$slname'
+                    ";
+            
+            
+            mysqli_query($con,$ins);
             $to= 'gangwanikeshav2005@gmail.com';
             $subject= 'cool subject';
             $message= 'Hello, this is a test email';
@@ -36,39 +40,33 @@
                         'X-Mailer: PHP/' . phpversion();
             mail($to, $subject, $message, $headers);
             header("Location: index.php?smessage=$success_msg");
-            exit();
+            
         }
     }
 
 
     if(isset($_POST['logIn']))
     {
-        $lemail = $_POST['liemail'];
-        $lpass = $_POST['lipass'];
+        $lemail=$_POST['liemail'];
+        $lpass=$_POST['lipass'];
 
-        // Use prepared statement to fetch user by email
-        $stmt = $con->prepare("SELECT * FROM reg WHERE reg_user = ? LIMIT 1");
-        $stmt->bind_param("s", $lemail);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if ($user = $result->fetch_assoc()) {
-            // Verify password
-            if (password_verify($lpass, $user['reg_pass'])) {
-                $_SESSION['loginID'] = $user['reg_fname'];
-                $_SESSION['loginEmail'] = $user['reg_user'];
-                $logIN = $_SESSION['loginID'];
-                header("Location: index.php?userid=$logIN");
-                exit();
-            } else {
-                $error2_msg = urlencode("INVALID EMAIL ID AND PASS  !");
-                header("Location: index.php?emessage=$error2_msg");
-                exit();
-            }
-        } else {
+        $sel2="SELECT * FROM reg WHERE reg_user='$lemail' and reg_pass='$lpass' ";
+        $exe2=mysqli_query($con,$sel2);
+        $check2=mysqli_num_rows($exe2);
+        $fetch=mysqli_fetch_array($exe2);
+
+        if($check2)
+        {
+            $_SESSION['loginID']=$fetch['reg_fname'];
+            $_SESSION['loginEmail']=$fetch['reg_user'];
+            $logIN=$_SESSION['loginID'];
+            header("Location: index.php?userid=$logIN");
+        }
+        else{
             $error2_msg = urlencode("INVALID EMAIL ID AND PASS  !");
             header("Location: index.php?emessage=$error2_msg");
-            exit();
         }
+
     }
 
 
