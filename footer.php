@@ -26,5 +26,5 @@
             </div>
         </div>
         <div class="copyRight">
-            Copyright © 2022 | Website made by 5 Sherrrrrrrr 🚀 
+            Copyright © 2022 | Website made by Keshav 🚀 
         </div>

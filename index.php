@@ -124,7 +124,11 @@
                 $headers .= "From: EscapeBay Travel <theescapebay.travel@gmail.com>" . "\r\n";
                 $headers .= "Reply-To: theescapebay.travel@gmail.com" . "\r\n";
                 $headers .= "X-Mailer: PHP/" . phpversion();
-                mail($to, $subject, $message, $headers);
+                if(mail($to, $subject, $message, $headers)) {
+                    error_log("Booking confirmation email sent successfully to $to");
+                } else {
+                    error_log("Failed to send booking confirmation email to $to");
+                }
                 
                 
                 
@@ -175,7 +179,11 @@
                 $headers .= "From: EscapeBay Travel <theescapebay.travel@gmail.com>" . "\r\n";
                 $headers .= "Reply-To: theescapebay.travel@gmail.com" . "\r\n";
                 $headers .= "X-Mailer: PHP/" . phpversion();
-                mail($to, $subject, $message, $headers);
+                if(mail($to, $subject, $message, $headers)) {
+                    error_log("Enquiry confirmation email sent successfully to $to");
+                } else {
+                    error_log("Failed to send enquiry confirmation email to $to");
+                }
 
 
 
